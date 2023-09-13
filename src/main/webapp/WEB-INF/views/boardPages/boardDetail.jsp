@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <div id="section">
@@ -35,7 +36,8 @@
                 <th>image</th>
                 <td>
                     <c:forEach items="${boardFileList}" var="boardFile">
-                        <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}" alt="" width="100" height="100">
+                        <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}" alt=""
+                             width="100" height="100">
                     </c:forEach>
                 </td>
             </tr>
@@ -48,6 +50,13 @@
     <div id="pass-check" style="display: none;">
         <input type="text" id="board-pass" placeholder="비밀번호 입력하세요">
         <input type="button" onclick="pass_check()" value="확인">
+    </div>
+    <div id="comment-write-area">
+        <input type="text" id="comment-writer" placeholder="작성자명 입력">
+        <input type="text" id="comment-contents" placeholder="내용 입력">
+        <button onclick="comment_write()">댓글작성!</button>
+    </div>
+    <div id="comment-list-area">
     </div>
 </div>
 </body>
@@ -72,6 +81,79 @@
         } else {
             alert("비밀번호 불일치!");
         }
+    }
+    const comment_write = () => {
+        const commentWriter = document.getElementById("comment-writer").value;
+        const commentContents = document.querySelector("#comment-contents").value;
+        const boardId = '${board.id}'
+        const result = document.getElementById("comment-list-area");
+        $.ajax({
+            type: "post",
+            url: "/comment/save",
+            date: {
+                commentWriter: commentWriter,
+                commentContents: commentContents,
+                boardId: boardId
+            },
+            success: function (res) {
+                console.log("리턴값: ", res);
+                let output =    "<table id=\"comment-list\">\n" +
+                    "    <tr>\n" +
+                    "        <th>작성자</th>\n" +
+                    "        <th>내용</th>\n" +
+                    "        <th>작성시간</th>\n" +
+                    "    </tr>\n";
+                for(let i in res) {
+                    output += "    <tr>\n";
+                    output += "        <td>" + res[i].commentWriter + "</td>\n";
+                    output += "        <td>" + res[i].commentContents + "</td>\n";
+                    output += "        <td>" + res[i].createdAt + "</td>\n";
+                    output += "    </tr>\n";
+                }
+                output += "</table>";
+                result.innerHTML = output;
+                document.getElementById("comment-writer").value = "";
+                document.getElementById("comment-contents").value = "";
+            },
+            error: function () {
+                console.log("작성 실패");
+            }
+        });
+    }
+    const output_fn = () => {
+        const result = document.getElementById("comment-list-area");
+        $.ajax({
+            type: "post",
+            url: "/comment/save",
+            date: {
+                commentWriter: commentWriter,
+                commentContents: commentContents,
+                boardId: boardId
+            },
+            success: function (res) {
+                console.log("리턴값: ", res);
+                let output =    "<table id=\"comment-list\">\n" +
+                    "    <tr>\n" +
+                    "        <th>작성자</th>\n" +
+                    "        <th>내용</th>\n" +
+                    "        <th>작성시간</th>\n" +
+                    "    </tr>\n";
+                for(let i in res) {
+                    output += "    <tr>\n";
+                    output += "        <td>" + res[i].commentWriter + "</td>\n";
+                    output += "        <td>" + res[i].commentContents + "</td>\n";
+                    output += "        <td>" + res[i].createdAt + "</td>\n";
+                    output += "    </tr>\n";
+                }
+                output += "</table>";
+                result.innerHTML = output;
+                document.getElementById("comment-writer").value = "";
+                document.getElementById("comment-contents").value = "";
+            },
+            error: function () {
+                console.log("작성 실패");
+            }
+        });
     }
 </script>
 </html>
