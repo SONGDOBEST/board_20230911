@@ -9,18 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482de8bc-4d48-4819-a9a3-244d869103ef" name="Changes" comment="taglib choose - when - otherwise를 이용한 댓글 리스트 작성">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/icia/board/dto/PageDTO.java" afterDir="false" />
+    <list default="true" id="482de8bc-4d48-4819-a9a3-244d869103ef" name="Changes" comment="검색 및 페이징 처리">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/icia/board/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icia/board/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/icia/board/repository/BoardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icia/board/repository/BoardRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/icia/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icia/board/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/board-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/board-mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/boardPages/boardDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/boardPages/boardDetail.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/boardPages/boardList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/boardPages/boardList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/html/commentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/html/commentList.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +179,7 @@
       <workItem from="1694391220730" duration="9255000" />
       <workItem from="1694475495665" duration="19437000" />
       <workItem from="1694562762067" duration="10859000" />
-      <workItem from="1694648307607" duration="220000" />
+      <workItem from="1694648307607" duration="588000" />
     </task>
     <task id="LOCAL-00001" summary="파일 첨부 수정">
       <created>1694563130697</created>
@@ -218,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694570940212</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="검색 및 페이징 처리">
+      <created>1694648805450</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1694648805450</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +240,7 @@
     <MESSAGE value="게시판 comment DTO Service Repository 추가" />
     <MESSAGE value="ajax 이용한 댓글작성" />
     <MESSAGE value="taglib choose - when - otherwise를 이용한 댓글 리스트 작성" />
-    <option name="LAST_COMMIT_MESSAGE" value="taglib choose - when - otherwise를 이용한 댓글 리스트 작성" />
+    <MESSAGE value="검색 및 페이징 처리" />
+    <option name="LAST_COMMIT_MESSAGE" value="검색 및 페이징 처리" />
   </component>
 </project>
