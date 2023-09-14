@@ -18,6 +18,7 @@ import java.util.Map;
 public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
+
     public void save(BoardDTO boardDTO) throws IOException {
         /*
             - 파일 있다.
@@ -40,7 +41,7 @@ public class BoardService {
             // 게시글 저장 후 id값 활용을 위해 리턴 받음.
             BoardDTO savedBoard = boardRepository.save(boardDTO);
             // 파일이 여러개 이기 때문에 반복문으로 파일 하나씩 꺼내서 저장 처리
-            for(MultipartFile boardFile: boardDTO.getBoardFile()) {
+            for (MultipartFile boardFile : boardDTO.getBoardFile()) {
                 // 파일만 따로 가져오기
                 // MultipartFile boardFile = boardDTO.getBoardFile();
                 // 파일 이름 가져오기
@@ -103,9 +104,9 @@ public class BoardService {
         // 전체 글 갯수 조회
         int boardCount = boardRepository.boardCount();
         // 전체 페이지 갯수 계산
-        int maxPage = (int) (Math.ceil((double)boardCount / pageLimit));
+        int maxPage = (int) (Math.ceil((double) boardCount / pageLimit));
         // 시작 페이지 값 계산(1, 4, 7, 10 ~~)
-        int startPage = (((int)(Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+        int startPage = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
         // 마지막 페이지 값 계산(3, 6, 9, 12 ~~)
         int endPage = startPage + blockLimit - 1;
         // 전체 페이지 갯수가 계산한 endPage 보다 작을 때는 endPage 값을 maxPage 값과 같게 세팅
@@ -125,10 +126,41 @@ public class BoardService {
         boardRepository.save(boardDTO);
     }
 
-    public List<BoardDTO> searchList(String q, String type) {
-        Map<String, String> searchParam = new HashMap<>();
+    public List<BoardDTO> searchList(String q, String type, int page) {
+        Map<String, Object> searchParam = new HashMap<>(); //object type의 value는 가장 '조상'타입. 모든 type의 변수를 다 담음
         searchParam.put("q", q);
         searchParam.put("type", type);
+
+        int pageLimit = 3; // 한페이지당 보여줄 글 갯수
+        int pagingStart = (page - 1) * pageLimit; // 요청한 페이지에 보여줄 첫번째 게시글의 순서
+        searchParam.put("start", pagingStart);
+        searchParam.put("limit", pageLimit);
         return boardRepository.searchList(searchParam);
+    }
+
+    public PageDTO searchPageNumber(String q, String type, int page) {
+        int pageLimit = 3; // 한페이지에 보여줄 글 갯수
+        int blockLimit = 3; // 하단에 보여줄 페이지 번호 갯수
+        Map<String, String> pagingParams = new HashMap<>();
+        pagingParams.put("q", q);
+        pagingParams.put("type", type);
+        // 검색어 기준 글 갯수 조회
+        int boardCount = boardRepository.boardSearchCount();
+        // 검색어 기준 전체 페이지 갯수 계산
+        int maxPage = (int) (Math.ceil((double) boardCount / pageLimit));
+        // 검색어 기준 시작 페이지 값 계산(1, 4, 7, 10 ~~)
+        int startPage = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+        // 검색어 기준 마지막 페이지 값 계산(3, 6, 9, 12 ~~)
+        int endPage = startPage + blockLimit - 1;
+        // 검색어 기준 전체 페이지 갯수가 계산한 endPage 보다 작을 때는 endPage 값을 maxPage 값과 같게 세팅
+        if (endPage > maxPage) {
+            endPage = maxPage;
+        }
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setPage(page);
+        pageDTO.setMaxPage(maxPage);
+        pageDTO.setEndPage(endPage);
+        pageDTO.setStartPage(startPage);
+        return pageDTO;
     }
 }

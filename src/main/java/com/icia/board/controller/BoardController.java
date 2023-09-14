@@ -53,8 +53,10 @@ public class BoardController {
                          @RequestParam("type") String type,
                          @RequestParam(value="page", required = false, defaultValue = "1") int page,
                          Model model) {
-        List<BoardDTO> boardDTOList = boardService.searchList(q, type);
+        List<BoardDTO> boardDTOList = boardService.searchList(q, type, page);
         model.addAttribute("boardList", boardDTOList);
+        PageDTO pageDTO = boardService.searchPageNumber(q, type, page);
+        model.addAttribute("paging", pageDTO);
         return "boardPages/boardList";
     }
 
