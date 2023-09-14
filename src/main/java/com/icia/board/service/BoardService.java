@@ -145,7 +145,7 @@ public class BoardService {
         pagingParams.put("q", q);
         pagingParams.put("type", type);
         // 검색어 기준 글 갯수 조회
-        int boardCount = boardRepository.boardSearchCount();
+        int boardCount = boardRepository.boardSearchCount(pagingParams);
         // 검색어 기준 전체 페이지 갯수 계산
         int maxPage = (int) (Math.ceil((double) boardCount / pageLimit));
         // 검색어 기준 시작 페이지 값 계산(1, 4, 7, 10 ~~)
